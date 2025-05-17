@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Preview • Pico CSS</title>
+    <meta name="description" content="A pure HTML example, without dependencies." />
+
+    <!-- Pico.css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2.0.6/css/pico.min.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+
+    <script src="https://cdn.plot.ly/plotly-2.30.0.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header class="container">
+      <hgroup>
+        <h1>Stock analyzer</h1>
+        <p>Simple Moving Average Strategy</p>
+      </hgroup>
+      <nav>
+        <ul>
+          <li>
+            <details class="dropdown">
+              <summary role="button" class="secondary">Theme</summary>
+              <ul>
+                <li><a href="#" data-theme-switcher="auto">Auto</a></li>
+                <li><a href="#" data-theme-switcher="light">Light</a></li>
+                <li><a href="#" data-theme-switcher="dark">Dark</a></li>
+              </ul>
+            </details>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <!-- ./ Header -->
+
+    <!-- Main -->
+    <main class="container">
+
+      <!-- Form elements-->
+      <section id="form">
+        <form>
+          <!-- change aria-invalid variable to true/false for the valid/invalid -->
+          <!-- disabled to disable -->
+
+          
+          <!-- States -->
+          <div class="grid">
+            <label for="ticker">
+              Ticker(s) [Up to 5] <a href="https://raw.githubusercontent.com/ahnazary/Finance/refs/heads/master/finance/src/database/valid_tickers.csv" target="_blank">Full List</a>
+              <input type="text" id="ticker" name="ticker" placeholder="AAPL" />
+              <small id="ticker-help" style="display:block; color:gray; font-size: 17px;">
+                Separate multiple tickers with commas (ex AAPL,MSFT,GOOG)
+              </small>
+              <small id="ticker-error" style="display:block; color:red; font-size: 17px;">
+                
+              </small>
+            </label>
+            <label for="fsma">
+              First SMA
+              <input type="text" id="fsma" name="fsma" placeholder="5" />
+              <small id="fsma-error" style="display:block; color:red; font-size: 17px;">
+                
+              </small>
+            </label>
+            <label for="ssma">
+              Second SMA
+              <input type="text" id="ssma" name="ssma" placeholder="20" />
+              <small id="ssma-error" style="display:block; color:red; font-size: 17px;">
+                
+              </small>
+            </label>
+          </div>
+
+          <div class="grid">
+            <!-- Date-->
+            <label for="start_date">
+              Start Date (Empty=earliest)
+              <input type="date" id="start_date" name="start_date" />
+              <small id="start_date-error" style="display:block; color:red; font-size: 17px;">
+                
+              </small>
+            </label>
+
+            <label for="end_date">
+              End Date (Empty=latest)
+              <input type="date" id="end_date" name="end_date" />
+              <small id="end_date-error" style="display:block; color:red; font-size: 17px;">
+                
+              </small>
+            </label>
+
+            <!-- Fee -->
+            <label for="transaction_fee">
+              Transaction Fee
+              <input type="number" id="transaction_fee" name="transaction_fee" min="0" max="50" value="0" />
+              <small id="transaction_fee-error" style="display:block; color:red; font-size: 17px;">
+                
+              </small>
+            </label>
+          </div>
+
+          <div class="grid">
+            <!-- Range slider control -->
+            <label for="money">
+             Money
+              <input type="range" min="0" max="100" value="50" id="range" name="money" />
+              <input type="text" id="money" name="money" placeholder="$50,000" />
+              <small id = "money-error">
+              
+              </small>
+            </label>
+          </div>
+
+          <!-- Buttons -->
+          <input type="reset" value="Reset" />
+          <input type="button" id = "calculate-btn" value="Calculate" />
+        </form>
+      </section>
+      <!-- ./ Form elements-->
+
+      <!-- Results -->
+      <section id = "results">
+        
+      </section>
+      <!-- ./ Results -->
+
+    <!-- Minimal theme switcher -->
+    <script src="{{ url_for('static', filename='theme-switch.js') }}"></script>
+    <script src="{{ url_for('static', filename='rangeConvert.js') }}"></script>
+    <script src="{{ url_for('static', filename='resultsLoad.js') }}"></script>
+
+  </body>
+</html>

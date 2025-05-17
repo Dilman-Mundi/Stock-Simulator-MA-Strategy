@@ -1,0 +1,29 @@
+<h2>Results</h2>
+<article style = "text-align: center">
+    <section id="tables">
+        <h2>Portfolio</h2>
+        <div class="overflow-auto">
+            <table class="striped">
+            <thead>
+                <tr>
+                <th>#</th>
+                <th>Stock</th>
+                <th>Transactions</th>
+                <th>P/L</th>
+                <th>Return</th>
+            </thead>
+            <tbody id="table-body">
+                <!-- Rows inserted dynamically -->
+            </tbody>
+            </table>
+        </div>
+    </section>
+
+    <div id = "plot-container"></div>
+    <br>
+
+
+    <button id = "download-btn">Download Transactions List</button>
+
+    <script src="{{ url_for('static', filename='resultsLoad.js') }}"></script>
+</article>
