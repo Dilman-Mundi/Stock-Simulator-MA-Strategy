@@ -1,0 +1,6 @@
+Flask
+yfinance
+pandas
+numpy
+python-dateutil
+openpyxl
