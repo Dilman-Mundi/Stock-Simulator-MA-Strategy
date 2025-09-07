@@ -121,12 +121,12 @@ document.addEventListener("DOMContentLoaded", function() {
                 }),
               ])
               .then(([tableValues, plotData]) => {
+                const sortedTableValues = tableValues.slice().sort((a, b) => parseFloat(b.PL) - parseFloat(a.PL));
                 // table
                 const tbody = document.getElementById("table-body");
                 tbody.innerHTML = "";
               
-                const previewRows = tableValues.slice(0, tableValues.length);
-                previewRows.forEach((row, index) => {
+                sortedTableValues.forEach((row, index) => {
                   const tr = document.createElement("tr");
 
                   const plColor = parseFloat(row.PL) > 0 ? "#25a48e" : parseFloat(row.PL) < 0 ? "#e03b4e" : "inherit";
@@ -202,6 +202,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
       const formData = new URLSearchParams({
         fullStockNames: results.fullStockNames,
+        tickers: results.tickers,
+        fsma: results.fsma,
+        ssma: results.ssma,
         df_json: results.df
       });
 

@@ -190,8 +190,6 @@ def stock_simulation(ticker, fSMA, sSMA, transaction_fee, start_date, end_date, 
     data['sSMA'] = data['Close'].rolling(window=sSMA).mean()
     data['Ans'] =  data['fSMA']-data['sSMA']
 
-    data.to_csv("output.csv")
-
     #Looks at difference of SMA before, True if +, False if -
     sign = None
     numOfStocks = 0
@@ -271,7 +269,7 @@ def stock_simulation(ticker, fSMA, sSMA, transaction_fee, start_date, end_date, 
     netWorth = round(float(money+numOfStocks*data.iloc[-1]['Close'][ticker]),2)
     pL = round(netWorth - prevMoney,2)
 
-    years = int(data.index[-1].date().year) - int(data.index[0].date().year) + 1
+    years = int(df["Date"].iloc[-1].year) - int(df["Date"].iloc[0].year) + 1
     ret = round(((netWorth / prevMoney) ** (1 / years) - 1)*100, 2)
 
     return df, plotDates, plotNetWorth, transactions, pL, ret
@@ -376,7 +374,8 @@ def download_table():
     for stock in df_json:
         df_list.append(pd.DataFrame.from_records(stock))
 
-    filename = tickers + fSMA + sSMA +'.xlsx'
+    print(tickers,fSMA,sSMA)
+    filename = f"{tickers}_{fSMA}_{sSMA}.xlsx"
 
     with pd.ExcelWriter(filename, engine = "openpyxl") as writer:
         for i in range(len(stockName)):
